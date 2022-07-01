@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:news_test_app/ui/screens/news_details_screen.dart';
 import 'package:news_test_app/ui/widgets/news_list.dart';
 
 class NewsScreen extends StatelessWidget {
