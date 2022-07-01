@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:news_test_app/=models=/news.dart';
+import 'package:news_test_app/ui/screens/news_details_screen.dart';
 import 'package:news_test_app/ui/utils.dart';
 
 class NewsListTile extends StatelessWidget {
@@ -37,7 +39,9 @@ class NewsListTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(4, 6, 4, 6),
       child: ListTile(
-        onTap: () => {},
+        onTap: () {
+          context.pushNamed(NewsDetailsScreen.name, extra: news);
+        },
         leading: imgUrl.isEmpty
             ? iconNewspaper
             : CachedNetworkImage(
