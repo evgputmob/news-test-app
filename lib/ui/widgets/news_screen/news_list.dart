@@ -36,10 +36,13 @@ class NewsList extends StatelessWidget {
       );
     }
 
-    return ListView.builder(
-      itemCount: news.length,
-      itemBuilder: (context, index) => NewsListTile(news: news[index]),
-      //keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+    return RefreshIndicator(
+      onRefresh: context.read<NewsCubit>().getNews,
+      child: ListView.builder(
+        itemCount: news.length,
+        itemBuilder: (context, index) => NewsListTile(news: news[index]),
+        //keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      ),
     );
   }
 }

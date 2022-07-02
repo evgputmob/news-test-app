@@ -54,11 +54,16 @@ class NewsListTile extends StatelessWidget {
                   errorWidget: (_, __, ___) => iconError,
                 ),
               ),
-        title: Text(
-          news.title,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+        title: Hero(
+          tag: 'title_${news.id}',
+          child: Material(
+            child: Text(
+              news.title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
         ),
         subtitle: Text(
           stripHtmlTags(news.text).trim(),

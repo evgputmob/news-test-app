@@ -33,11 +33,17 @@ class NewsHeader extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const SizedBox(height: horizPadding + 0.5 * topPadding),
-            Text(
-              news.title,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+            Hero(
+              tag: 'title_${news.id}',
+              child: Material(
+                color: Colors.transparent,
+                child: Text(
+                  news.title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
             Padding(
@@ -109,11 +115,17 @@ class NewsHeader extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: horizPadding + 0.5 * topPadding),
-                    Text(
-                      news.title,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                    Hero(
+                      tag: 'title_${news.id}',
+                      child: Material(
+                        color: Colors.transparent,
+                        child: Text(
+                          news.title,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
                     Padding(

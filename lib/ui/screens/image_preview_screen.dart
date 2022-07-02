@@ -33,7 +33,11 @@ class ImagePreviewScreen extends StatelessWidget {
             ),
             Positioned(
               child: IconButton(
-                icon: Icon(Icons.close, color: Colors.grey[700], size: 40),
+                icon: Icon(
+                  Icons.close,
+                  color: Theme.of(context).primaryColor.withOpacity(0.8),
+                  size: 40,
+                ),
                 onPressed: () => Navigator.of(context).pop(),
               ),
               top: 10,
