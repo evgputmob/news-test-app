@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:news_test_app/logic/news_cubit.dart';
 import 'package:news_test_app/logic/x_status.dart';
-import 'package:news_test_app/ui/widgets/news_list_tile.dart';
+import 'news_list_tile.dart';
 
 class NewsList extends StatelessWidget {
   const NewsList({Key? key}) : super(key: key);

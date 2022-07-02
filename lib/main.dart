@@ -6,6 +6,7 @@ import 'package:news_test_app/=models=/news.dart';
 import 'package:news_test_app/data/i_news_service.dart';
 import 'package:news_test_app/data/implementations/news_service.dart';
 import 'package:news_test_app/logic/news_cubit.dart';
+import 'package:news_test_app/ui/screens/image_preview_screen.dart';
 import 'package:news_test_app/ui/screens/news_details_screen.dart';
 import 'package:news_test_app/ui/screens/news_screen.dart';
 
@@ -47,6 +48,12 @@ class NewsAppTestApp extends StatelessWidget {
         builder: (_, state) => NewsDetailsScreen(
           news: (state.extra != null) ? (state.extra! as News) : null,
         ),
+      ),
+      GoRoute(
+        name: ImagePreviewScreen.name,
+        path: ImagePreviewScreen.path,
+        builder: (_, state) =>
+            ImagePreviewScreen(imagePath: state.params['imagePath']!),
       ),
     ],
     //debugLogDiagnostics: true,

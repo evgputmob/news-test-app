@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_test_app/ui/widgets/news_list.dart';
+import 'package:news_test_app/ui/widgets/news_screen/news_list.dart';
 
 class NewsScreen extends StatelessWidget {
   static const name = 'news';

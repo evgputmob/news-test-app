@@ -44,12 +44,15 @@ class NewsListTile extends StatelessWidget {
         },
         leading: imgUrl.isEmpty
             ? iconNewspaper
-            : CachedNetworkImage(
-                imageUrl: imgUrl,
-                width: previewImgSideSize,
-                height: previewImgSideSize,
-                placeholder: (_, __) => iconNewspaper,
-                errorWidget: (_, __, ___) => iconError,
+            : Hero(
+                tag: 'image_${news.id}',
+                child: CachedNetworkImage(
+                  imageUrl: imgUrl,
+                  width: previewImgSideSize,
+                  height: previewImgSideSize,
+                  placeholder: (_, __) => iconNewspaper,
+                  errorWidget: (_, __, ___) => iconError,
+                ),
               ),
         title: Text(
           news.title,
