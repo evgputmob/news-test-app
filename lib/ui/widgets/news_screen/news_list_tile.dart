@@ -16,7 +16,7 @@ class NewsListTile extends StatelessWidget {
     final imgUrl = news.previewPath ?? '';
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(4, 6, 4, 6),
+      padding: const EdgeInsets.fromLTRB(0, 6, 4, 6),
       child: ListTile(
         onTap: () {
           context.pushNamed(NewsDetailsScreen.name, extra: news);

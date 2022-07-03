@@ -35,9 +35,11 @@ class NewsList extends StatelessWidget {
 
     return RefreshIndicator(
       onRefresh: context.read<NewsCubit>().getNews,
-      child: ListView.builder(
+      child: ListView.separated(
         itemCount: news.length,
-        itemBuilder: (context, index) => NewsListTile(news: news[index]),
+        itemBuilder: (_, index) => NewsListTile(news: news[index]),
+        separatorBuilder: (_, __) =>
+            Container(color: Colors.grey[350], height: 2),
         //keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       ),
     );
