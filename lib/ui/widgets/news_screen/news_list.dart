@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:news_test_app/logic/news_cubit.dart';
 import 'package:news_test_app/logic/x_status.dart';
+import 'package:news_test_app/ui/widgets/news_screen/error_message.dart';
 import 'news_list_tile.dart';
 
 class NewsList extends StatelessWidget {
@@ -19,11 +20,7 @@ class NewsList extends StatelessWidget {
         return const Center(child: CircularProgressIndicator());
       //---
       case XStatus.failure:
-        return Center(
-          child: (newsState.errorMessage != null)
-              ? Text(newsState.errorMessage!, textAlign: TextAlign.center)
-              : const Text('Something went wrong', textAlign: TextAlign.center),
-        );
+        return ErrorMessage(messageText: newsState.errorMessage);
       //---
       case XStatus.success:
     }

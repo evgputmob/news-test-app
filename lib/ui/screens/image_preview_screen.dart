@@ -20,17 +20,22 @@ class ImagePreviewScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            InteractiveViewer(
-              scaleEnabled: true,
-              panEnabled: true,
-              child: Center(
-                child: CachedNetworkImage(
-                  imageUrl: imagePath,
-                  placeholder: (_, __) => const CircularProgressIndicator(),
-                  errorWidget: (_, __, ___) => Icon(
-                    Icons.error,
-                    color: Colors.red.shade300,
-                    size: 100,
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: InteractiveViewer(
+                scaleEnabled: true,
+                panEnabled: true,
+                child: Center(
+                  child: CachedNetworkImage(
+                    imageUrl: imagePath,
+                    placeholder: (_, __) => const CircularProgressIndicator(),
+                    errorWidget: (_, __, ___) => Icon(
+                      Icons.error,
+                      color: Colors.red.shade300,
+                      size: 100,
+                    ),
                   ),
                 ),
               ),
