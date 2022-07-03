@@ -1,11 +1,24 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'news.g.dart';
+
+@JsonSerializable()
 class News {
+  @JsonKey(name: 'Id')
   final int id;
+  @JsonKey(name: 'Title')
   final String title;
+  @JsonKey(name: 'Text')
   final String text;
+  @JsonKey(name: 'DateTime')
   final String dateTime;
+  @JsonKey(name: 'PreviewPath')
   final String? previewPath;
+  @JsonKey(name: 'MainImagePath')
   final String? mainImagePath;
+  @JsonKey(name: 'AdditionalImagesPaths')
   final List<String> additionalImagesPaths;
+  @JsonKey(name: 'Language')
   final String language;
 
   News({
@@ -19,15 +32,7 @@ class News {
     required this.language,
   });
 
-  factory News.fromJson(Map<String, dynamic> json) => News(
-        id: json['Id'],
-        title: json['Title'],
-        text: json['Text'],
-        dateTime: json['DateTime'], //DateTime.parse(json['DateTime']),
-        previewPath: json['PreviewPath'],
-        mainImagePath: json['MainImagePath'],
-        additionalImagesPaths:
-            List<String>.from(json['AdditionalImagesPaths'].map((x) => x)),
-        language: json['Language'],
-      );
+  factory News.fromJson(Map<String, dynamic> json) => _$NewsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NewsToJson(this);
 }
