@@ -1,6 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:news_test_app/ui/screens/full_screen_carousel.dart';
+import 'package:news_test_app/ui/widgets/carousel_image.dart';
 
 class NewsImages extends StatefulWidget {
   final List<String> images;
@@ -21,20 +23,6 @@ class _NewsImagesState extends State<NewsImages> {
     super.dispose();
   }
 
-  Widget carouselImage(String imagePath) {
-    return CachedNetworkImage(
-      imageUrl: imagePath,
-      placeholder: (_, __) => const Center(child: CircularProgressIndicator()),
-      errorWidget: (_, __, ___) => Center(
-        child: Icon(
-          Icons.error,
-          size: 70,
-          color: Colors.red.shade200,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     if (widget.images.isEmpty) {
@@ -49,44 +37,59 @@ class _NewsImagesState extends State<NewsImages> {
           carouselController: _controller,
           options: CarouselOptions(
             height: 200,
+            viewportFraction: 1.0,
             enlargeCenterPage: true,
-            enableInfiniteScroll: true,
+            enableInfiniteScroll: (widget.images.length > 1),
             onPageChanged: (index, reason) {
               setState(() {
                 _currentCarouselSlide = index;
               });
             },
           ),
-          items: widget.images.map((item) => carouselImage(item)).toList(),
+          items: widget.images
+              .map(
+                (item) => GestureDetector(
+                  child: CarouselImage(imagePath: item),
+                  onTap: () {
+                    context.pushNamed(
+                      FullScreenCarousel.name,
+                      extra: widget.images,
+                      params: {'startIndex': _currentCarouselSlide.toString()},
+                    );
+                  },
+                ),
+              )
+              .toList(),
         ),
-        const SizedBox(height: 12),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: SizedBox(
-            height: 11,
-            child: FittedBox(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: widget.images.asMap().entries.map((entry) {
-                  return GestureDetector(
-                    onTap: () => _controller.animateToPage(entry.key),
-                    child: Container(
-                      width: 11,
-                      height: 11,
-                      margin: const EdgeInsets.symmetric(horizontal: 5),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.black.withOpacity(
-                          _currentCarouselSlide == entry.key ? 0.9 : 0.2,
+        if (widget.images.length > 1) const SizedBox(height: 12),
+        if (widget.images.length > 1)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: SizedBox(
+              height: 11,
+              child: FittedBox(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: widget.images.asMap().entries.map((entry) {
+                    return GestureDetector(
+                      onTap: () => _controller.animateToPage(entry.key),
+                      child: Container(
+                        width: 11,
+                        height: 11,
+                        margin: const EdgeInsets.symmetric(horizontal: 5),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.black.withOpacity(
+                            _currentCarouselSlide == entry.key ? 0.9 : 0.2,
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                }).toList(),
+                    );
+                  }).toList(),
+                ),
               ),
             ),
           ),
-        ),
         const SizedBox(height: 14),
       ],
     );

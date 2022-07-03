@@ -6,6 +6,7 @@ import 'package:news_test_app/=models=/news.dart';
 import 'package:news_test_app/data/i_news_service.dart';
 import 'package:news_test_app/data/implementations/news_service.dart';
 import 'package:news_test_app/logic/news_cubit.dart';
+import 'package:news_test_app/ui/screens/full_screen_carousel.dart';
 import 'package:news_test_app/ui/screens/image_preview_screen.dart';
 import 'package:news_test_app/ui/screens/news_details_screen.dart';
 import 'package:news_test_app/ui/screens/news_screen.dart';
@@ -52,8 +53,24 @@ class NewsAppTestApp extends StatelessWidget {
       GoRoute(
         name: ImagePreviewScreen.name,
         path: ImagePreviewScreen.path,
-        builder: (_, state) =>
-            ImagePreviewScreen(imagePath: state.params['imagePath']!),
+        builder: (_, state) => ImagePreviewScreen(
+          imagePath: (state.params['imagePath'] != null)
+              ? state.params['imagePath']!
+              : '',
+        ),
+      ),
+      GoRoute(
+        name: FullScreenCarousel.name,
+        path: FullScreenCarousel.path,
+        builder: (_, state) => FullScreenCarousel(
+          images: (state.extra != null) ? state.extra! as List<String> : [],
+          startIndex: int.tryParse(
+                (state.params['startIndex'] != null)
+                    ? state.params['startIndex']!
+                    : '',
+              ) ??
+              0,
+        ),
       ),
     ],
     //debugLogDiagnostics: true,

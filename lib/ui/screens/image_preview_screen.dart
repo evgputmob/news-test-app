@@ -12,6 +12,10 @@ class ImagePreviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (imagePath.isEmpty) {
+      return const Center(child: Text('Изображение отсутствует'));
+    }
+
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -35,13 +39,13 @@ class ImagePreviewScreen extends StatelessWidget {
               child: IconButton(
                 icon: Icon(
                   Icons.close,
-                  color: Theme.of(context).primaryColor.withOpacity(0.8),
-                  size: 40,
+                  color: Theme.of(context).primaryColor.withOpacity(0.7),
+                  size: 36,
                 ),
                 onPressed: () => Navigator.of(context).pop(),
               ),
-              top: 10,
-              right: 10,
+              top: 2,
+              right: 4,
             )
           ],
         ),
